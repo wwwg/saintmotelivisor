@@ -25,24 +25,17 @@ let email = (to, subject, body) => {
 		}
 	});
 }
-let reqInterval = 0,
-	isRequestInProgress = false,
-	lastBody = null;
+let isRequestInProgress = false,
+	lastBody = null,
+	emails = [];
 if (!process.argv[2]) {
 	console.log('missing argument! usage:');
-	console.log('node saintmotelivisor.js <recipient email>');
+	console.log('node saintmotelivisor.js <recipient emails>');
 	process.exit(0);
 }
-if (process.argv[3]) {
-	if (!isNaN(parseInt(process.argv[3]))) {
-		reqInterval = parseInt(process.argv[3]);
-	} else {
-		reqInterval = DEFAULT_QUERY_INTERVAL;
-	}
-} else {
-	reqInterval = DEFAULT_QUERY_INTERVAL;
+for (let i = 2; i < process.argv.length - 3, ++i) {
+	emails.push(process.argv[i]);
 }
-const TO = process.argv[2];
 
 setInterval(() => {
 	if (isRequestInProgress) {
@@ -59,9 +52,11 @@ setInterval(() => {
 			// console.log('recieved identical body, nothing special has occured.');
 		} else if (body != lastBody) {
 			console.log('change detected, emailing recipient');
-			email(TO, 'Saint Motel Concert Update',
+			for (let i = 0; i < emails.length; ++i) {
+				email(emails[i], 'Saint Motel Concert Update',
 					'Saint Motel concert times have been updated, check their site.');
+			}
 		}
 		isRequestInProgress = false;
 	});
-}, reqInterval);
+}, DEFAULT_QUERY_INTERVAL);
