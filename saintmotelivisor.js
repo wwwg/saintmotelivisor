@@ -19,23 +19,20 @@ let email = (to, subject, body) => {
 		'text': body
 	}
 	transport.sendMail(opts,(err, info) => {
-		if (error) {
+		if (err) {
 			console.log('ERROR sending email:');
 			console.log(err);
 		}
 	});
 }
-let isRequestInProgress = false,
-	lastBody = null,
-	emails = [];
 if (!process.argv[2]) {
 	console.log('missing argument! usage:');
 	console.log('node saintmotelivisor.js <recipient emails>');
 	process.exit(0);
 }
-for (let i = 2; i < process.argv.length - 3, ++i) {
-	emails.push(process.argv[i]);
-}
+let isRequestInProgress = false,
+	lastBody = null,
+	emails = process.argv.slice(2);;
 
 setInterval(() => {
 	if (isRequestInProgress) {
