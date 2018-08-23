@@ -44,5 +44,9 @@ if (process.argv[3]) {
 const TO = process.argv[2];
 
 setInterval(() => {
-	// todo
+	if (isRequestInProgress) {
+		console.log('WARN: skipping request cycle because prior request isn\'t complete');
+		return;
+	}
+	isRequestInProgress = true;
 }, reqInterval);
