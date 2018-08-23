@@ -48,10 +48,23 @@ setInterval(() => {
 		} else if (body == lastBody) {
 			// console.log('recieved identical body, nothing special has occured.');
 		} else if (body != lastBody) {
+			let res;
+			try {
+				JSON.parse(body);
+			} catch (e) {
+				console.log('recieved wrong response: ');
+				console.log(body);
+				return;
+			}
 			console.log('change detected, emailing recipient');
+			let emailBody = 'New concerts:\n',
+				concerts = res.resultsPage.results.performance, // an array
+				length = (res.resultsPage.performance > 3) ? 3 : res.resultsPage.results.performance.length;
+			for (let i = 0; i <  length; ++i) {
+				emailBody += `#${i + 1}: ${res.resultsPage.results.performance[i].event.displayName}\n`;
+			}
 			for (let i = 0; i < emails.length; ++i) {
-				email(emails[i], 'Saint Motel Concert Update',
-					'Saint Motel concert times have been updated, check their site.');
+				email(emails[i], 'Saint Motel Concert Update', emailBody);
 			}
 		}
 		isRequestInProgress = false;
