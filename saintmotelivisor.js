@@ -3,6 +3,7 @@ const request = require('request'),
 	EMAIL_ADDR = 'joseph.goolag@gmail.com',
 	EMAIL_PASS = 'goolag66',
 	CONCERT_QUERY_ENDPOINT = `https://api.songkick.com/api/3.0/artists/609071/calendar/managed_performances.json?apikey=heMLjOnXj1zuWDXP&per_page=all`,
+	DEFAULT_QUERY_INTERVAL = 1000, // in ms
 	transport = nodemailer.createTransport({
 		service: 'gmail',
 		auth: {
@@ -24,9 +25,20 @@ let email = (to, subject, body) => {
 		}
 	});
 }
+let reqInterval = 0;
 if (!process.argv[2]) {
 	console.log('missing argument! usage:');
 	console.log('node saintmotelivisor.js <recipient email>');
 	process.exit(0);
 }
+if (process.argv[3]) {
+	if (!isNaN(parseInt(process.argv[3]))) {
+		reqInterval = parseInt(process.argv[3]);
+	} else {
+		reqInterval = DEFAULT_QUERY_INTERVAL;
+	}
+} else {
+	reqInterval = DEFAULT_QUERY_INTERVAL;
+}
 const TO = process.argv[2];
+let lastBody = null;
