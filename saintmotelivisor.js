@@ -3,7 +3,7 @@ const request = require('request'),
 	EMAIL_ADDR = 'joseph.goolag@gmail.com',
 	EMAIL_PASS = 'goolag66',
 	CONCERT_QUERY_ENDPOINT = `https://api.songkick.com/api/3.0/artists/609071/calendar/managed_performances.json?apikey=heMLjOnXj1zuWDXP&per_page=all`,
-	DEFAULT_QUERY_INTERVAL = 5000, // in ms
+	DEFAULT_QUERY_INTERVAL = 10000, // in ms
 	transport = nodemailer.createTransport({
 		service: 'gmail',
 		auth: {
