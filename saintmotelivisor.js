@@ -25,7 +25,8 @@ let email = (to, subject, body) => {
 		}
 	});
 }
-let reqInterval = 0;
+let reqInterval = 0,
+	isRequestInProgress = false;
 if (!process.argv[2]) {
 	console.log('missing argument! usage:');
 	console.log('node saintmotelivisor.js <recipient email>');
@@ -41,7 +42,7 @@ if (process.argv[3]) {
 	reqInterval = DEFAULT_QUERY_INTERVAL;
 }
 const TO = process.argv[2];
-let lastBody = null;
+
 setInterval(() => {
 	// todo
 }, reqInterval);
