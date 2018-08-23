@@ -42,3 +42,6 @@ if (process.argv[3]) {
 }
 const TO = process.argv[2];
 let lastBody = null;
+setInterval(() => {
+	// todo
+}, reqInterval);
