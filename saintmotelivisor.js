@@ -26,7 +26,8 @@ let email = (to, subject, body) => {
 	});
 }
 let reqInterval = 0,
-	isRequestInProgress = false;
+	isRequestInProgress = false,
+	lastBody = null;
 if (!process.argv[2]) {
 	console.log('missing argument! usage:');
 	console.log('node saintmotelivisor.js <recipient email>');
@@ -49,4 +50,18 @@ setInterval(() => {
 		return;
 	}
 	isRequestInProgress = true;
+	request(CONCERT_QUERY_ENDPOINT, (err, res, body) => {
+		if (lastBody === null) {
+			console.log('recieved initial body:');
+			console.log(body);
+			lastBody = body;
+		} else if (body == lastBody) {
+			console.log('recieved identical body, nothing special has occured.');
+		} else if (body != lastBody) {
+			console.log('change detected, emailing recipient');
+			email(TO, 'Saint Motel Concert Update',
+					'Saint Motel concert times have been updated, check their site.');
+		}
+		isRequestInProgress = false;
+	});
 }, reqInterval);
