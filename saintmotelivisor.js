@@ -56,7 +56,7 @@ setInterval(() => {
 			console.log(body);
 			lastBody = body;
 		} else if (body == lastBody) {
-			console.log('recieved identical body, nothing special has occured.');
+			// console.log('recieved identical body, nothing special has occured.');
 		} else if (body != lastBody) {
 			console.log('change detected, emailing recipient');
 			email(TO, 'Saint Motel Concert Update',
