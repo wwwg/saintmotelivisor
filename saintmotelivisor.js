@@ -45,6 +45,16 @@ setInterval(() => {
 			console.log('recieved initial body:');
 			console.log(body);
 			lastBody = body;
+			let res = JSON.parse(body),
+				emailBody = 'Current concerts:\n',
+				concerts = res.resultsPage.results.performance, // an array
+				length = (res.resultsPage.performance > 3) ? 3 : res.resultsPage.results.performance.length;
+			for (let i = 0; i <  length; ++i) {
+				emailBody += `#${i + 1}: ${res.resultsPage.results.performance[i].event.displayName}\n`;
+			}
+			for (let i = 0; i < emails.length; ++i) {
+				email(emails[i], 'saintmotelivisor concert listing', emailBody);
+			}
 		} else if (body == lastBody) {
 			// console.log('recieved identical body, nothing special has occured.');
 		} else if (body != lastBody) {
