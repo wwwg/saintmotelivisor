@@ -23,3 +23,8 @@ let email = (to, subject, body) => {
 		}
 	});
 }
+if (!process.argv[2]) {
+	console.log('missing argument! usage:');
+	console.log('node saintmotelivisor.js <recipient email>');
+	process.exit(0);
+}
