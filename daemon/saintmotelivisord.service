@@ -2,7 +2,7 @@
 Description=saintmotelivisor
 
 [Service]
-ExecStart=/etc/saintmotelivisord/saintmotelivisor.js
+ExecStart=/etc/saintmotelivisord/daemon.js
 Restart=always
 User=nobody
 Group=nogroup
