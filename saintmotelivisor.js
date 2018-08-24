@@ -25,11 +25,6 @@ let email = (to, subject, body) => {
 		}
 	});
 }
-if (!process.argv[2]) {
-	console.log('missing argument! usage:');
-	console.log('node saintmotelivisor.js <recipient emails>');
-	process.exit(0);
-}
 let isRequestInProgress = false,
 	lastBody = null;
 let init = (emails) => {
@@ -83,6 +78,11 @@ let init = (emails) => {
 module.exports = init;
 
 if (require.main === module) {
+	if (!process.argv[2]) {
+		console.log('missing argument! usage:');
+		console.log('node saintmotelivisor.js <recipient emails>');
+		process.exit(0);
+	}
 	console.log('saintmotelivisor cmd line');
 	init(process.argv.slice(2));
 }
