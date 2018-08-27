@@ -47,7 +47,7 @@ let init = (emails) => {
 					emailBody += `#${i + 1}: ${res.resultsPage.results.performance[i].event.displayName}\n`;
 				}
 				for (let i = 0; i < emails.length; ++i) {
-					email(emails[i], 'saintmotelivisor concert listing', emailBody);
+					email(emails[i], 'saintmotelivisor was just started (NOT A LISTING UPDATE)', emailBody);
 				}
 			} else if (body == lastBody) {
 				// console.log('recieved identical body, nothing special has occured.');
