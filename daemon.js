@@ -14,6 +14,14 @@ let mkworker = () => {
 	} else {
 		let saintmotelivisor = require('./saintmotelivisor');
 	}
-}, mkworkers => n => {
+}, mkworkers = n => {
 	while (--n > 0) mkworker();
+}, killall = sig => {
+	for (const id in cluster.workers) {
+		if (cluster.workers.hasOwnProperty(id)) {
+			let w = cluster.workers[id];
+			w.removeAllListeners();
+			worker.process.kill(sig);
+		}
+	}
 }
