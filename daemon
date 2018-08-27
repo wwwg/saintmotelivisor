@@ -13,6 +13,7 @@ let mkworker = () => {
 		});
 	} else {
 		let saintmotelivisor = require('./saintmotelivisor');
+		saintmotelivisor(config.emails);
 	}
 }, mkworkers = n => {
 	while (--n > 0) mkworker();
