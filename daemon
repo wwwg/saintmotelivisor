@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-require('daemon')();
+require('daemonize-process')();
 const cluser = require('cluster'),
 	config = require('./daemon-config.json'),
 	cpus = require('os').cpus().length;

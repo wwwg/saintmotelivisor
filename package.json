@@ -4,6 +4,6 @@
 	"dependencies": {
 		"request": "*",
 		"nodemailer": "*",
-		"daemon": "*"
+		"daemonize-process": "*"
 	}
 }
