@@ -22,7 +22,7 @@ let mkworker = () => {
 		if (cluster.workers.hasOwnProperty(id)) {
 			let w = cluster.workers[id];
 			w.removeAllListeners();
-			worker.process.kill(sig);
+			w.process.kill(sig);
 		}
 	}
 }
