@@ -2,6 +2,7 @@
 
 require('daemon')();
 const cluser = require('cluster'),
+	config = require('./daemon-config.json'),
 	cpus = require('os').cpus().length;
 
 let mkworker = () {
