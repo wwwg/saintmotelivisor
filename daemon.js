@@ -5,7 +5,7 @@ const cluser = require('cluster'),
 	config = require('./daemon-config.json'),
 	cpus = require('os').cpus().length;
 
-let mkworker = () {
+let mkworker = () => {
 	if (cluster.isMaster) {
 		let child = cluster.fork();
 		child.on('exit', (code, signal) => {
