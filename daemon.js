@@ -25,3 +25,12 @@ let mkworker = () => {
 		}
 	}
 }
+process.on('SIGHUP', () => {
+	killall('SIGTERM');
+	mkworker();
+});
+process.on('SIGTERM', () => {
+	killall('SIGTERM');
+	process.exit(0);
+});
+mkworker();
