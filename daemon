@@ -9,7 +9,13 @@ let mkworker = () => {
 	if (cluster.isMaster) {
 		let child = cluster.fork();
 		child.on('exit', (code, signal) => {
-			mkworker();
+			let nWorkers = 0;
+			for (const id in cluster.workers) {
+				nWorkers++;
+			}
+			if (nWorkers === 0) {
+				mkworker();
+			}
 		});
 	} else {
 		let saintmotelivisor = require('./saintmotelivisor');
