@@ -14,4 +14,6 @@ let mkworker = () => {
 	} else {
 		let saintmotelivisor = require('./saintmotelivisor');
 	}
+}, mkworkers => n => {
+	while (--n > 0) mkworker();
 }
