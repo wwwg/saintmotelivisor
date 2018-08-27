@@ -3,6 +3,7 @@
 	"description": "checks for saint motel concert times",
 	"dependencies": {
 		"request": "*",
-		"nodemailer": "*"
+		"nodemailer": "*",
+		"daemon": "*"
 	}
 }
